@@ -1,1 +1,1 @@
-# spotify_technical_challenge_submission
+# shopify_technical_challenge_submission
