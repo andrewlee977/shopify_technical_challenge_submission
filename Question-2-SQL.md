@@ -25,20 +25,13 @@ Answer: 40
 c. What product was ordered the most by customers in Germany?
 
 WITH table1 AS ( 
-SELECT * 
-FROM Orders 
-WHERE CustomerID IN (
-                    SELECT CustomerID FROM Customers WHERE Country = 'Germany') 
-)
+      SELECT * 
+      FROM Orders 
+      WHERE CustomerID IN ( SELECT CustomerID FROM Customers WHERE Country = 'Germany') )
 
-SELECT ProductName, COUNT(ProductName) as Count_Orders 
-FROM table1 a 
-JOIN OrderDetails b 
-ON a.OrderID = b.OrderID 
-JOIN Products c 
-ON b.ProductID = c.ProductID 
-GROUP BY ProductName 
-ORDER BY Count_Orders DESC 
+SELECT ProductName, SUM(Quantity) as Count_Orders
+FROM table1 a JOIN OrderDetails b ON a.OrderID = b.OrderID JOIN Products c ON b.ProductID = c.ProductID GROUP BY ProductName
+ORDER BY Count_Orders DESC
 LIMIT 1;
 
-Answer: Gorgonzola Telino (5 orders)
+Answer: Boston Crab Meat (160 orders)
